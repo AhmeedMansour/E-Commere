@@ -1,0 +1,90 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+
+
+
+
+.text-green-color {
+    --tw-text-opacity: 1;
+    color: rgb(10 173 10 / var(--tw-text-opacity, 1)) /* #0aad0a */;
+}
+
+.active{
+    color: #0aad0a;
+}
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15sease-in-out, background-color .15sease-in-out, border-color .15sease-in-out, box-shadow .15sease-in-out;
+}
+.instagram-icon {
+    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+  .instagram-icon:hover {
+    filter: brightness(1.2);
+  }
+
+  .social-icon {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .instagram-icon {
+    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    background-clip: text; /* Standard property */
+    -webkit-background-clip: text; /* For WebKit browsers */
+    -webkit-text-fill-color: transparent;
+}
+
+.facebook-icon {
+    background: linear-gradient(45deg, #3b5998, #4a69ad);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tiktok-icon {
+    background: linear-gradient(45deg, #ff0050, #00f2ea);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.twitter-icon {
+    background: linear-gradient(45deg, #1da1f2, #0e71c8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.linkedin-icon {
+    background: linear-gradient(45deg, #0077b5, #004a75);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.youtube-icon {
+    background: linear-gradient(45deg, #ff0000, #cc0000);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.social-icon:hover {
+    filter: brightness(1.2);
+}

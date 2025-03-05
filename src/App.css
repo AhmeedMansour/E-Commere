@@ -1,0 +1,10 @@
+body {
+    background-image: url('/assests/Images/back.svg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.dark body {
+    background-image: url('/assests/Images/dark2.jpg');
+}
