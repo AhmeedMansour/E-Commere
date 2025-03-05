@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, useNavigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
@@ -25,51 +25,60 @@ import PaymentMethond from './components/PaymentMethond/PaymentMethond';
 import DecodedContextProvider from './Context/DecodedContext';
 import UserOrders from './components/UserOrders/UserOrders';
 
-const queryClient = new QueryClient();
-
-// Helper function to get token safely
+// Helper function to safely get the token
 const getToken = () => (typeof window !== "undefined" ? localStorage.getItem("token") : "");
 
-const routes = createBrowserRouter([
-  {
-    path: '',
-    element: <Layout />,
-    children: [
-      { index: true, element: <Guard><Home /></Guard> },
-      { path: 'cart', element: <Guard><Cart /></Guard> },
-      { path: 'allorders', element: <Guard><AllOrders /></Guard> },
-      { path: 'payment', element: <Guard><PaymentMethond /></Guard> },
-      { path: 'products', element: <Guard> <Products /></Guard> },
-      { path: 'orders', element: <Guard> <AllOrders /></Guard> },
-      { path: 'order-details/:id', element: <Guard> <UserOrders /></Guard> },  // Fixed route name
-      { path: 'categories', element: <Guard><Categories /></Guard> },
-      { path: 'wishlist', element: <Guard><Wishlist /></Guard> },
-      { path: 'brandsdetails/:id', element: <Guard><BrandsDetails /></Guard> },
-      { path: 'brands', element: <Guard><Brands /></Guard> },
-      { path: 'details/:id', element: <Guard><ProductDetails /></Guard> },
-      { path: 'login', element: <AuthGuard><Login /></AuthGuard> },
-      { path: 'register', element: <AuthGuard><Register /></AuthGuard> },
-      { path: '*', element: <Error /> },
-    ]
-  }
-]);
+const AppRoutes = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = getToken();
+    if (!token) {
+      navigate('/login'); // Redirect to login if no token found
+    }
+  }, []);
+
+  const routes = createBrowserRouter([
+    {
+      path: '',
+      element: <Layout />,
+      children: [
+        { index: true, element: <Guard><Home /></Guard> },
+        { path: 'cart', element: <Guard><Cart /></Guard> },
+        { path: 'allorders', element: <Guard><AllOrders /></Guard> },
+        { path: 'payment', element: <Guard><PaymentMethond /></Guard> },
+        { path: 'products', element: <Guard><Products /></Guard> },
+        { path: 'orders', element: <Guard><AllOrders /></Guard> },
+        { path: 'order-details/:id', element: <Guard><UserOrders /></Guard> },  // Fixed route name
+        { path: 'categories', element: <Guard><Categories /></Guard> },
+        { path: 'wishlist', element: <Guard><Wishlist /></Guard> },
+        { path: 'brandsdetails/:id', element: <Guard><BrandsDetails /></Guard> },
+        { path: 'brands', element: <Guard><Brands /></Guard> },
+        { path: 'details/:id', element: <Guard><ProductDetails /></Guard> },
+        { path: 'login', element: <AuthGuard><Login /></AuthGuard> },
+        { path: 'register', element: <AuthGuard><Register /></AuthGuard> },
+        { path: '*', element: <Error /> },
+      ]
+    }
+  ]);
+
+  return <RouterProvider router={routes} />;
+};
 
 const App = () => {
   return (
-    <>
-      <AuthContextProvider>
-        <WishlistContextProvider>
-          <CartContextProvider>
-            <DecodedContextProvider>
-              <QueryClientProvider client={queryClient}>
-                <RouterProvider key={routes} router={routes} />
-                <Toaster />
-              </QueryClientProvider>
-            </DecodedContextProvider>
-          </CartContextProvider>
-        </WishlistContextProvider>
-      </AuthContextProvider>
-    </>
+    <AuthContextProvider>
+      <WishlistContextProvider>
+        <CartContextProvider>
+          <DecodedContextProvider>
+            <QueryClientProvider client={new QueryClient()}>
+              <AppRoutes />
+              <Toaster />
+            </QueryClientProvider>
+          </DecodedContextProvider>
+        </CartContextProvider>
+      </WishlistContextProvider>
+    </AuthContextProvider>
   );
 };
 
