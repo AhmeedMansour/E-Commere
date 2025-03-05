@@ -63,7 +63,7 @@ export default function AllOrders() {
                                     </td>
                                     <td className="p-3 text-center">
                                         <button
-                                          onClick={()=>navigate(`/orders/${item.id}`)}
+                                          onClick={()=>navigate(`/order-details/${item.id}`)}
                                         className="bg-green-500 hover:bg-green-600 cursor-pointer text-white font-semibold rounded-lg px-4 py-2 transition-all duration-300 shadow-md">
                                             View
                                         </button>
