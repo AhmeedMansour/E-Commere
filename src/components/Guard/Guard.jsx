@@ -1,13 +1,29 @@
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../Context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
 
-import React, { useContext } from 'react'
-import { AuthContext } from '../../Context/AuthContext'
-import { Link } from 'react-router-dom'
+export default function Guard({ children }) {
+  const { token } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [isAuth, setIsAuth] = useState(null);
 
-export default function Guard({children}) {
-    const {token} = useContext(AuthContext)
-  return (
-    <div>
-     { token? children : <div className="h-screen flex flex-col items-center justify-center bg-gray-100 text-center p-6">
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setIsAuth(storedToken);
+  }, [token]);
+
+  if (isAuth === null) {
+    return (
+      <div className="h-screen flex items-center justify-center text-lg font-semibold">
+        Checking authentication...
+      </div>
+    );
+  }
+
+  return isAuth ? (
+    children
+  ) : (
+    <div className="h-screen flex flex-col items-center justify-center bg-gray-100 text-center p-6">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-sm">
         <h2 className="text-3xl font-semibold text-red-600 mb-4">
           Access Denied!
@@ -22,7 +38,6 @@ export default function Guard({children}) {
           Go to Login
         </Link>
       </div>
-    </div> }
     </div>
-  )
+  );
 }
