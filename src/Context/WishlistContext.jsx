@@ -1,76 +1,87 @@
-import axios from 'axios';
-import React, { createContext, useState } from 'react'
-import toast from 'react-hot-toast';
+import axios from "axios";
+import React, { createContext, useState } from "react";
+import toast from "react-hot-toast";
 
+export const WishlistContext = createContext();
 
+export default function WishlistContextProvider({ children }) {
+    const [wishlistData, setWishlistData] = useState([]);
+    const [wishlistCount, setWishlistCount] = useState(0);
+    const [loading, setLoading] = useState(false);
 
+    // Helper function to safely get the token
+    const getToken = () => (typeof window !== "undefined" ? localStorage.getItem("token") : "");
 
-   export const WishlistContext = createContext()
+    // Function to add an item to the wishlist
+    async function addWishlistItem(productId) {
+        try {
+            const token = getToken();
+            if (!token) throw new Error("User not authenticated");
 
-export default function WishlistContextProvider({children}) {
-  const [wishlistData,setWishlistData] = useState([])
-  const [wishlistCount,setWishlistCount] = useState()
+            const res = await axios.post(
+                "https://ecommerce.routemisr.com/api/v1/wishlist",
+                { productId },
+                { headers: { token } }
+            );
 
-  const [loading,setLoading] = useState(false)
-   // to add to wishlist
-   async function addWishlistItem(productId){
-    try{
-        const res = await axios.post(`https://ecommerce.routemisr.com/api/v1/wishlist`,{productId},{headers:{token:localStorage.getItem("token")}})
-        if(res.data.status=="success") {
-    
-            toast.success(res.data.message,{duration:1500})
-            setWishlistCount(data.count)
-
-           }
-    }catch(err){
-        console.log(err,"ERROOOOOR!!");
-        
+            if (res.data.status === "success") {
+                toast.success(res.data.message, { duration: 1500 });
+                setWishlistCount(res.data.count); // Fixed: Using correct response data
+            }
+        } catch (err) {
+            console.error("Error adding to wishlist:", err);
+        }
     }
-    
-        
+
+    // Function to fetch the wishlist
+    async function displayWishlist() {
+        setLoading(true);
+        try {
+            const token = getToken();
+            if (!token) return;
+
+            const { data } = await axios.get("https://ecommerce.routemisr.com/api/v1/wishlist", {
+                headers: { token },
+            });
+
+            setWishlistCount(data.count || 0);
+            setWishlistData(data.data || []);
+        } catch (err) {
+            console.error("Error fetching wishlist:", err);
+        } finally {
+            setLoading(false);
+        }
     }
-      //////////////
 
+    // Function to remove an item from the wishlist
+    async function deleteWishlistItem(id) {
+        try {
+            const token = getToken();
+            if (!token) return;
 
-      // to display wishlist 
-      async function displayWishlist() {
-        setLoading(true)
-          try{
-            const {data} = await axios.get("https://ecommerce.routemisr.com/api/v1/wishlist",{headers:{token:localStorage.getItem("token")}})
+            const { data } = await axios.delete(`https://ecommerce.routemisr.com/api/v1/wishlist/${id}`, {
+                headers: { token },
+            });
 
-            setWishlistCount(data.count)
-            setWishlistData(data.data)
-          }
-          catch(err){
-            console.log(err,"DISPLAY ERRRRRORRR!!");
-            
-          }
-          finally{
-            setLoading(false)
-          }
-      }
+            setWishlistData((prevWishlist) => prevWishlist.filter((item) => item._id !== id));
+            setWishlistCount(data.count || 0);
+        } catch (err) {
+            console.error("Error removing item from wishlist:", err);
+        }
+    }
 
-        /////////////////////////
-        // to delete item from wishlist 
-        async function deleteWishlistItem(id) {
-          try {
-              const { data } = await axios.delete(`https://ecommerce.routemisr.com/api/v1/wishlist/${id}`, {
-                  headers: { token: localStorage.getItem("token") }
-              });
-              
-              // Ensure wishlist updates correctly
-              setWishlistData((prevWishlist) => prevWishlist.filter(item => item._id !== id));
-              setWishlistCount(data.count)
-          } catch (err) {
-              console.log(err, "MY ERROR IS HERE!!");
-          }
-      }
-      
-  return<>
-  <WishlistContext.Provider value={{addWishlistItem,displayWishlist,wishlistCount,wishlistData,deleteWishlistItem,loading}}>
-
-        {children}
-  </WishlistContext.Provider>
-  
-  </>
+    return (
+        <WishlistContext.Provider
+            value={{
+                addWishlistItem,
+                displayWishlist,
+                wishlistCount,
+                wishlistData,
+                deleteWishlistItem,
+                loading,
+            }}
+        >
+            {children}
+        </WishlistContext.Provider>
+    );
 }

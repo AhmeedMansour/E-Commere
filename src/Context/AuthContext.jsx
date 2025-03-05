@@ -1,23 +1,22 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
-    const [token, setToken] = useState(localStorage.getItem('token') || ""); // Ensure it's always a string
+    const [token, setToken] = useState(""); // Default to an empty string
 
     useEffect(() => {
-        const tokenFromStorage = localStorage.getItem('token');
-
+        // Ensure this runs only on the client
+        const tokenFromStorage = typeof window !== "undefined" ? localStorage.getItem("token") : "";
         if (tokenFromStorage) {
             setToken(tokenFromStorage);
-        } else {
-            localStorage.removeItem('token');
-            setToken(""); // Ensure token is always a string
         }
     }, []);
 
     const logout = () => {
-        localStorage.removeItem('token');
+        if (typeof window !== "undefined") {
+            localStorage.removeItem("token");
+        }
         setToken("");
     };
 
