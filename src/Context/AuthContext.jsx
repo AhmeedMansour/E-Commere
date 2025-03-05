@@ -1,34 +1,29 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
+export const AuthContext = createContext();
 
- export const AuthContext = createContext();
-export default function AuthContextProvider({children}) {
-    const [token, setToken] = useState(null)
+export default function AuthContextProvider({ children }) {
+    const [token, setToken] = useState(localStorage.getItem('token') || ""); // Ensure it's always a string
 
-    useEffect(()=>{
-        const tokenFromStorage = localStorage.getItem('token')
-        if(tokenFromStorage){
-            setToken(tokenFromStorage)
+    useEffect(() => {
+        const tokenFromStorage = localStorage.getItem('token');
+
+        if (tokenFromStorage) {
+            setToken(tokenFromStorage);
+        } else {
+            localStorage.removeItem('token');
+            setToken(""); // Ensure token is always a string
         }
-        else{
-            localStorage.removeItem('token')
-            setToken(null)
-        }
-     } ,[])
+    }, []);
 
-
-     const logout = ()=> {
+    const logout = () => {
         localStorage.removeItem('token');
-    setToken(null);
-     }
-  return <>
-  
- <AuthContext.Provider value={{token , setToken,logout}}>
-{children} 
+        setToken("");
+    };
 
- </AuthContext.Provider>
-
-
-
-  </>
+    return (
+        <AuthContext.Provider value={{ token, setToken, logout }}>
+            {children}
+        </AuthContext.Provider>
+    );
 }
