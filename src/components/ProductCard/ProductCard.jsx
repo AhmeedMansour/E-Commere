@@ -55,10 +55,10 @@ export default function ProductCard({ product }) {
 
 
     return (
-        <div className="w-full sm:min-w-[90%] md:max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm relative group overflow-hidden pb-14 mx-auto">
+        <div className="w-full sm:min-w-[90%] md:max-w-lg bg-white border border-gray-200 rounded-lg shadow-sm relative group overflow-hidden pb-14 mx-auto">
             {/* Product Image with Link */}
             <Link to={`/details/${_id}`}>
-                <img className="p-2 rounded-t-lg w-full h-[450px] object-contain" src={imageCover} alt={title} />
+                <img className="p-2 rounded-t-lg w-full h-[350px] object-contain" src={imageCover} alt={title} />
             </Link>
 
             {/* Product Info */}
