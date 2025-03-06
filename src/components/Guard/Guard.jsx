@@ -10,7 +10,11 @@ export default function Guard({ children }) {
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     setIsAuth(storedToken);
-  }, [token]);
+
+    if (!storedToken) {
+      navigate('/login'); // Redirect safely inside useEffect
+    }
+  }, [token, navigate]); // Added `navigate` to dependencies
 
   if (isAuth === null) {
     return (

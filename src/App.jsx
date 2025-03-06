@@ -24,6 +24,9 @@ import AllOrders from './components/AllOrders/AllOrders'
 import PaymentMethond from './components/PaymentMethond/PaymentMethond'
 import DecodedContextProvider from './Context/DecodedContext';
 import UserOrders from './components/UserOrders/UserOrders';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import ResetCode from './components/ResetCode/ResetCode';
+import ResetPassword from './components/ResetPassword/ResetPassword';
 const queryClient = new QueryClient()
 const App = () => {
 
@@ -36,6 +39,9 @@ const App = () => {
         { path: 'payment', element: <Guard><PaymentMethond /></Guard> },
         { path: 'products', element: <Guard> <Products /></Guard> },
         { path: 'orders', element: <Guard> <AllOrders /></Guard> },
+        { path: 'forgotpassword', element:  <ForgotPassword />},
+        { path: 'forgotpassword/resetcode', element:  <ResetCode />},
+        { path: 'forgotpassword/resetpassword', element:  <ResetPassword />},
         { path: 'order-details/:id', element: <Guard> <UserOrders /></Guard> },
         { path: 'categories', element: <Guard><Categories /></Guard> },
         { path: 'wishlist', element: <Guard><Wishlist /></Guard> },

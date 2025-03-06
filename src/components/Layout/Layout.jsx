@@ -9,11 +9,11 @@ const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    if (!token) {
-      navigate('/login');
-    }
-  }, [token, navigate]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     navigate('/login');
+  //   }
+  // }, [token, navigate]);
 
   // Hide Navbar & Footer on login and register pages
   const authPages = ['/login', '/register'];
