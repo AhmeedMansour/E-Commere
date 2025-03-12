@@ -6,8 +6,7 @@ import { WishlistContext } from "../../Context/WishlistContext";
 
 export default function ProductCard({ product }) {
     const { addCartItem, isAddingToCart } = useContext(CartContext);
-    const { addWishlistItem, wishlistData, displayWishlist } = useContext(WishlistContext);
-
+    const { addWishlistItem, deleteWishlistItem, wishlistData, displayWishlist } = useContext(WishlistContext);
     const { _id, ratingsAverage, price, imageCover, title, category } = product;
     const catName = category?.name || "";
 
@@ -31,11 +30,16 @@ export default function ProductCard({ product }) {
 
     const handleWishlist = async () => {
         try {
-            await addWishlistItem(_id);
-            displayWishlist();
+            if (isWishlisted) {
+                await deleteWishlistItem(_id);
+            } else {
+                await addWishlistItem(_id);
+
+            }
+            displayWishlist(); // Refresh the wishlist
         } catch (error) {
-            console.error("Error adding to wishlist:", error);
-            toast.error("Failed to add to wishlist");
+            console.error("Error updating wishlist:", error);
+            toast.error("Failed to update wishlist");
         }
     };
     const renderStars = (rating) => {

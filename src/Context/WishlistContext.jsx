@@ -65,6 +65,12 @@ export default function WishlistContextProvider({ children }) {
 
             setWishlistData((prevWishlist) => prevWishlist.filter((item) => item._id !== id));
             setWishlistCount(data.count || 0);
+            console.log(data);
+            if (data.status === "success") {
+                toast.error(data.message, { duration: 1500 });
+                setWishlistCount(data.count); // Fixed: Using correct response data
+            }
+            
         } catch (err) {
             console.error("Error removing item from wishlist:", err);
         }
