@@ -56,8 +56,8 @@ export default function UserOrders() {
       {order ? (
         <div className="space-y-6">
           {/* Order, Customer, and Address Info */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-            <div className="dark:text-white">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+            <div className="text-gray-800 dark:text-white">
               <h3 className="text-lg font-bold mb-2">
                 Order Details <i className="fa-solid fa-truck-fast"></i>
               </h3>
@@ -72,7 +72,7 @@ export default function UserOrders() {
                 {order.isDelivered ? "✅ Delivered" : "⏳ Pending"}
               </p>
             </div>
-            <div className="dark:text-white">
+            <div className="text-gray-800 dark:text-white">
               <h3 className="text-lg font-bold mb-2">
                 Address Info <i className="fa-solid fa-map-location-dot"></i>
               </h3>
@@ -89,7 +89,7 @@ export default function UserOrders() {
                 {order.shippingAddress?.phone || "Not available"}
               </p>
             </div>
-            <div className="dark:text-white">
+            <div className="text-gray-800 dark:text-white">
               <h3 className="text-lg font-bold mb-2">
                 Customer Info <i className="fa-solid fa-address-card"></i>
               </h3>
@@ -108,13 +108,13 @@ export default function UserOrders() {
           {/* Order Items Table */}
           <div className="overflow-x-auto w-full">
             <table className="w-full border-collapse shadow-md rounded-lg">
-              <thead className="bg-gray-200 dark:bg-gray-700 dark:text-white">
+              <thead className="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white">
                 <tr>
-                  <th className="p-3 text-left dark:text-white">#</th>
-                  <th className="p-3 text-left dark:text-white">Image</th>
-                  <th className="p-3 text-left dark:text-white">Product</th>
-                  <th className="p-3 text-left dark:text-white">Quantity</th>
-                  <th className="p-3 text-left dark:text-white">Price</th>
+                  <th className="p-3 text-left text-gray-800 dark:text-white">#</th>
+                  <th className="p-3 text-left text-gray-800 dark:text-white">Image</th>
+                  <th className="p-3 text-left text-gray-800 dark:text-white">Product</th>
+                  <th className="p-3 text-left text-gray-800 dark:text-white">Quantity</th>
+                  <th className="p-3 text-left text-gray-800 dark:text-white">Price</th>
                 </tr>
               </thead>
               <tbody>
@@ -125,9 +125,9 @@ export default function UserOrders() {
                       index % 2 === 0
                         ? "bg-gray-50 dark:bg-gray-800"
                         : "bg-white dark:bg-gray-900"
-                    } border-b dark:border-gray-700`}
+                    } border-b dark:border-gray-800`}
                   >
-                    <td className="p-3 dark:text-white">{index + 1}</td>
+                    <td className="p-3 text-gray-800 dark:text-white">{index + 1}</td>
                     <td className="p-3">
                       <img
                         className="w-16 h-16 object-cover rounded-md"
@@ -135,12 +135,12 @@ export default function UserOrders() {
                         alt="Product"
                       />
                     </td>
-                    <td className="p-3 dark:text-white">
+                    <td className="p-3 text-gray-800 dark:text-white">
                       {item.product?.title.split(" ").slice(0, 2).join(" ") ||
                         "N/A"}
                     </td>
-                    <td className="p-3 dark:text-white">{item.count}</td>
-                    <td className="p-3 dark:text-white font-medium">
+                    <td className="p-3 text-gray-800 dark:text-white">{item.count}</td>
+                    <td className="p-3 text-gray-800 dark:text-white font-medium">
                       £E {item.price}
                     </td>
                   </tr>
