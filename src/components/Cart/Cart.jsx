@@ -53,7 +53,7 @@ export default function Cart() {
                       <button
                         disabled={cart.count == 1}
                         onClick={() => updateCart(cart.product._id, cart.count - 1)}
-                        className="h-6 w-6 p-1 text-xs sm:text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                        className="h-6 flex items-center justify-center w-6 p-1 text-xs sm:text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
                       >
                         -
                       </button>
@@ -62,7 +62,7 @@ export default function Cart() {
                       </span>
                       <button
                         onClick={() => updateCart(cart.product._id, cart.count + 1)}
-                        className="h-6 w-6 p-1 text-xs sm:text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+                        className="h-6 flex items-center justify-center w-6 p-1 text-xs sm:text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
                       >
                         +
                       </button>
