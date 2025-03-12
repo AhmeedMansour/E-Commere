@@ -101,7 +101,7 @@ const Home = () => {
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full max-w-4xl p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-white dark:text-white"
+                className="w-full max-w-4xl p-3  rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-950 border-gray-950 border dark:border-white dark:text-white"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
