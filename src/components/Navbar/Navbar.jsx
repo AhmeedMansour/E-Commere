@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import logo from '../../assets/Images/freshcart-logo.svg';
+import logo2 from '../../assets/Images/favicon.png';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import { CartContext } from '../../Context/CartContext';
@@ -210,14 +211,23 @@ const Navbar = () => {
         {/* Logo & Dark Mode Toggle */}
         <div className="logo flex items-center space-x-2">
           <Link to="/">
-            <img
-              src={logo}
-              alt="FreshCart"
-              className="h-10"
-              onError={(e) => {
-                e.target.src = 'path/to/fallback-logo.png';
-              }}
-            />
+            <div className="logo flex items-center space-x-2">
+              <Link to="/">
+                <div className="flex items-center">
+                  <img
+                    src={logo2}
+                    alt="FreshCart"
+                    className="h-8 md:h-10 lg:h-12 transition-all"
+                    onError={(e) => {
+                      e.target.src = 'path/to/fallback-logo.png';
+                    }}
+                  />
+                  <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 dark:text-gray-300 hidden sm:block">
+                    Fresh Cart
+                  </h2>
+                </div>
+              </Link>
+            </div>
           </Link>
           {/* Dark Mode Toggle */}
           <label className="relative inline-flex items-center cursor-pointer">

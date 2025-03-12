@@ -16,7 +16,7 @@ const Home = () => {
   async function allProducts() {
     const response = await axios.get("https://ecommerce.routemisr.com/api/v1/products");
     return response.data;
-    
+
   }
 
   // Fetching data using React Query
@@ -30,7 +30,7 @@ const Home = () => {
   const products = data?.data || [];
   const categories = allCat?.data.data || [];
 
-  
+
   // Filter products based on search query
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -41,7 +41,7 @@ const Home = () => {
       {/* Slider Section */}
       <div className="grid grid-cols-1 sm:grid-cols-4 md:grid-cols-6 lg:gap-x-2 max-w-4xl md:max-w-6xl mx-4 md:mx-auto my-6">
         <div className="sm:col-span-4 md:col-span-4 sm:px-4">
-          <Swiper slidesPerView={1}  modules={[Autoplay]} loop autoplay={{ delay: 7000 }} pagination={{ clickable: true }}>
+          <Swiper slidesPerView={1} modules={[Autoplay]} loop autoplay={{ delay: 7000 }} pagination={{ clickable: true }}>
             <SwiperSlide>
               <img src={Slider1} alt="HomePage Slider" className="w-full h-[300px] sm:h-[350px] md:h-[400px] object-cover md:shadow-lg rounded-2xl md:rounded-none" />
             </SwiperSlide>
@@ -65,13 +65,17 @@ const Home = () => {
 
 
       {/* slider Categories */}
-
       <Swiper
-        slidesPerView={6}
-        loop={categories.length > 6}
+        slidesPerView={3} // Default for small screens
+        loop={categories.length > 5}
         modules={[Autoplay]}
         spaceBetween={10}
         autoplay={{ delay: 1000, disableOnInteraction: false }}
+        breakpoints={{
+          768: { slidesPerView: 4 }, // Medium screens (md)
+          1024: { slidesPerView: 5 }, // Large screens (lg)
+          1280: { slidesPerView: 6 }, // Extra large screens
+        }}
         className="my-3"
       >
         {categories.map((cat) => (
@@ -81,6 +85,7 @@ const Home = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+
       {/* slider Categories */}
 
       <div className="container mx-auto px-6"> {/* Added px-6 for horizontal padding */}
