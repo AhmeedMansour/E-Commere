@@ -27,6 +27,9 @@ import UserOrders from './components/UserOrders/UserOrders';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 import ResetCode from './components/ResetCode/ResetCode';
 import ResetPassword from './components/ResetPassword/ResetPassword';
+import UserDetails from './components/UserDetails/UserDetails';
+import { OrderDataProvider } from './Context/OrderDataContext';
+import { ThemeProvider } from './Context/ThemeContext';
 const queryClient = new QueryClient()
 const App = () => {
 
@@ -39,9 +42,10 @@ const App = () => {
         { path: 'payment', element: <Guard><PaymentMethond /></Guard> },
         { path: 'products', element: <Guard> <Products /></Guard> },
         { path: 'orders', element: <Guard> <AllOrders /></Guard> },
-        { path: 'forgotpassword', element:  <ForgotPassword />},
-        { path: 'forgotpassword/resetcode', element:  <ResetCode />},
-        { path: 'forgotpassword/resetpassword', element:  <ResetPassword />},
+        { path: 'forgotpassword', element: <ForgotPassword /> },
+        { path: 'forgotpassword/resetcode', element: <ResetCode /> },
+        { path: 'forgotpassword/resetpassword', element: <ResetPassword /> },
+        { path: 'userdetails', element: <Guard> <UserDetails /></Guard> },
         { path: 'order-details/:id', element: <Guard> <UserOrders /></Guard> },
         { path: 'categories', element: <Guard><Categories /></Guard> },
         { path: 'wishlist', element: <Guard><Wishlist /></Guard> },
@@ -58,16 +62,20 @@ const App = () => {
   return (
     <>
       <AuthContextProvider>
-        <WishlistContextProvider>
-          <CartContextProvider>
-            <DecodedContextProvider>
-              <QueryClientProvider client={queryClient}>
-                <RouterProvider router={routes} />
-                <Toaster />
-              </QueryClientProvider>
-            </DecodedContextProvider>
-          </CartContextProvider>
-        </WishlistContextProvider>
+        <OrderDataProvider>
+          <ThemeProvider>
+            <WishlistContextProvider>
+              <CartContextProvider>
+                <DecodedContextProvider>
+                  <QueryClientProvider client={queryClient}>
+                    <RouterProvider router={routes} />
+                    <Toaster />
+                  </QueryClientProvider>
+                </DecodedContextProvider>
+              </CartContextProvider>
+            </WishlistContextProvider>
+          </ThemeProvider>
+        </OrderDataProvider>
       </AuthContextProvider>
 
     </>

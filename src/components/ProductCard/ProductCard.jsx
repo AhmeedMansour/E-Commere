@@ -55,51 +55,60 @@ export default function ProductCard({ product }) {
 
 
     return (
-        <div className="w-full sm:min-w-[90%] md:max-w-lg bg-white border border-gray-200 rounded-lg shadow-sm relative group overflow-hidden pb-14 mx-auto">
-            {/* Product Image with Link */}
-            <Link to={`/details/${_id}`}>
-                <img className="p-2 rounded-t-lg w-full h-[350px] object-contain" src={imageCover} alt={title} />
-            </Link>
-
-            {/* Product Info */}
-            <div className="px-5 pb-5 flex flex-col h-full">
-                <div className="flex justify-between items-center">
-                    <h5 className="text-[16px] text-[#4fa74f] font-semibold">{catName}</h5>
-                    <button
-                        onClick={handleWishlist}
-                        className={`text-3xl transition-colors duration-300 ${isWishlisted ? "text-red-500" : "text-black"}`}
-                    >
-                        ♥
-                    </button>
-                </div>
-
-                {/* Product Title with Link */}
-                <Link to={`/details/${_id}`}>
-                    <h5 className="text-2xl font-semibold tracking-tight text-gray-900">{title.split(" ").slice(0, 2).join(" ")}</h5>
-                </Link>
-
-               
-
-                {/* Price & Ratings */}
-                <div className="flex items-center justify-between mt-2.5 mb-5 min-h-[40px]">
-                    <span className="text-2xl font-bold text-gray-900">£E {price}</span>
-                    <div className="flex items-center space-x-1">
-                        {renderStars(ratingsAverage)}
-                    </div>
-                </div>
-
-            </div>
-
-            {/* Add to Cart Button */}
-            <div className="absolute bottom-[-50px] left-0 w-full flex justify-center group-hover:bottom-5 transition-all duration-300">
+        <div className="w-full sm:min-w-[90%] md:max-w-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm relative group overflow-hidden pb-14 mx-auto">
+        {/* Product Image with Link */}
+        <Link to={`/details/${_id}`}>
+            <img
+                className="p-2 rounded-t-lg w-full h-[350px] object-contain bg-white dark:bg-gray-800"
+                src={imageCover}
+                alt={title}
+            />
+        </Link>
+    
+        {/* Product Info */}
+        <div className="px-5 pb-5 flex flex-col h-full">
+            <div className="flex justify-between items-center">
+                <h5 className="text-[16px] text-[#4fa74f] dark:text-[#5cc75c] font-semibold">
+                    {catName}
+                </h5>
                 <button
-                    onClick={() => addCartItem(_id)}
-                    className="w-3/4 cursor-pointer text-white bg-[#4fa74f] hover:bg-[#479647] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-2 py-2"
-                    disabled={isAddingToCart}
+                    onClick={handleWishlist}
+                    className={`text-3xl transition-colors duration-300 ${
+                        isWishlisted ? "text-red-500 dark:text-red-400" : "text-black dark:text-gray-300"
+                    }`}
                 >
-                    {isAddingToCart ? "Adding..." : "Add to Cart"}
+                    ♥
                 </button>
             </div>
+    
+            {/* Product Title with Link */}
+            <Link to={`/details/${_id}`}>
+                <h5 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
+                    {title.split(" ").slice(0, 2).join(" ")}
+                </h5>
+            </Link>
+    
+            {/* Price & Ratings */}
+            <div className="flex items-center justify-between mt-2.5 mb-5 min-h-[40px]">
+                <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                    £E {price}
+                </span>
+                <div className="flex items-center space-x-1">
+                    {renderStars(ratingsAverage)}
+                </div>
+            </div>
         </div>
+    
+        {/* Add to Cart Button */}
+        <div className="absolute bottom-[-50px] left-0 w-full flex justify-center group-hover:bottom-5 transition-all duration-300">
+            <button
+                onClick={() => addCartItem(_id)}
+                className="w-3/4 cursor-pointer text-white bg-[#4fa74f] hover:bg-[#479647] dark:hover:bg-[#3e8e3e] focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-500 font-medium rounded-lg text-lg px-2 py-2"
+                disabled={isAddingToCart}
+            >
+                {isAddingToCart ? "Adding..." : "Add to Cart"}
+            </button>
+        </div>
+    </div>
     );
 }

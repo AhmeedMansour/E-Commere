@@ -16,6 +16,7 @@ const Home = () => {
   async function allProducts() {
     const response = await axios.get("https://ecommerce.routemisr.com/api/v1/products");
     return response.data;
+    
   }
 
   // Fetching data using React Query
@@ -28,6 +29,8 @@ const Home = () => {
   // Extract products array
   const products = data?.data || [];
   const categories = allCat?.data.data || [];
+
+  
   // Filter products based on search query
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -74,7 +77,7 @@ const Home = () => {
         {categories.map((cat) => (
           <SwiperSlide key={cat._id}>
             <img src={cat.image} className="h-[200px] w-full rounded-lg" alt={cat.name} />
-            <h3 className="text-center">{cat.name}</h3>
+            <h3 className="text-center dark:text-white">{cat.name}</h3>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -93,7 +96,7 @@ const Home = () => {
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full max-w-4xl p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full max-w-4xl p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-white dark:text-white"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -107,7 +110,7 @@ const Home = () => {
                   <ProductCard key={product._id} product={product} />
                 ))
               ) : (
-                <p className="text-center text-gray-500 col-span-full">No products found.</p>
+                <p className="text-center text-6xl text-gray-500 col-span-full dark:text-white">No products found.</p>
               )}
             </div>
           </div>

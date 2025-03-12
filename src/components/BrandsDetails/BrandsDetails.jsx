@@ -40,7 +40,7 @@ export default function BrandsDetails() {
               src={brandData.image} 
               alt={brandData.name}
             />
-            <h2 className="text-3xl font-bold mt-4">{brandData.name}</h2>
+            <h2 className="text-3xl font-bold mt-4 dark:text-white">{brandData.name}</h2>
           </div>
         </div>
       ) : (
