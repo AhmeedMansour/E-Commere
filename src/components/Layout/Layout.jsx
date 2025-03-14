@@ -9,14 +9,9 @@ const Layout = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     navigate('/login');
-  //   }
-  // }, [token, navigate]);
 
-  // Hide Navbar & Footer on login and register pages
-  const authPages = ['/login', '/register'];
+  // Hide Navbar & Footer on login, register and other  pages like forgot password 
+  const authPages = ['/login', '/register','/forgotpassword','/forgotpassword/resetcode','/forgotpassword/resetpassword'];
   const isAuthPage = authPages.includes(location.pathname);
 
   return (
