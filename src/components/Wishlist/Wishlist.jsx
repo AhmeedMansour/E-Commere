@@ -34,7 +34,7 @@ export default function Wishlist() {
             <DotLoader color="#0AAD0A" />
           </div>
         ) : (
-          <div className="container mx-auto py-3 px-4 sm:px-6 bg-white dark:bg-gray-900">
+          <div className="container mx-auto py-3 px-4 sm:px-6 bg-transparent">
             {!wishlistData?.length ? (
               <p className="text-center text-gray-500 dark:text-gray-400 text-lg">
                 Your wishlist is empty.

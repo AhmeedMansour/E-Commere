@@ -8,7 +8,7 @@ const Categories = () => {
   const categories = allCat?.data.data || [];
 
   return (
-    <div className="container mx-auto max-w-7xl py-6 px-4 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="container mx-auto max-w-7xl py-6 px-4 bg-transparent transition-colors duration-300">
   {catLoading ? (
     <div className="w-full h-screen flex justify-center items-center">
       <DotLoader color="#0AAD0A" />

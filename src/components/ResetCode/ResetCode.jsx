@@ -41,16 +41,16 @@ export default function ResetCode() {
   });
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 p-4 pt-20">
+    <div className="min-h-screen flex items-center justify-center bg-transparent px-4 py-4">
       <form
         onSubmit={formik.handleSubmit}
-        className="bg-white p-6 rounded-2xl shadow-md w-full max-w-lg mx-auto"
+        className="w-full max-w-md mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 -mt-8"
       >
-        <h2 className="text-2xl font-semibold text-center mb-4">
+        <h2 className="text-3xl font-bold text-green-600 dark:text-green-500 mb-6 text-center">
           Verify Reset Code
         </h2>
 
-        <label className="block text-gray-700 text-lg mb-2">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Enter Reset Code
         </label>
         <input
@@ -63,19 +63,26 @@ export default function ResetCode() {
             formik.setFieldValue("resetCode", e.target.value.replace(/\s/g, ""));
           }}
           onBlur={formik.handleBlur} // Show errors after leaving the field
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 
-            [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+          className="w-full px-4 py-2 text-gray-900 dark:text-gray-100 bg-transparent border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-green-500 focus:border-green-500 dark:focus:border-green-500 outline-none transition-all [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         />
         {formik.touched.resetCode && formik.errors.resetCode && (
-          <p className="text-red-500 text-sm mt-1">{formik.errors.resetCode}</p>
+          <div className="mt-2 p-2 text-sm text-red-800 bg-red-50 dark:bg-red-900/50 dark:text-red-300 rounded-md">
+            {formik.errors.resetCode}
+          </div>
         )}
 
         <button
           type="submit"
-          className="cursor-pointer mt-4 w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600"
+          className="w-full mt-6 bg-green-600 text-white px-6 py-3 rounded-md font-medium hover:bg-green-700 focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 transition-all disabled:bg-green-400 disabled:cursor-not-allowed flex items-center justify-center"
           disabled={formik.isSubmitting} // Prevent multiple submissions
         >
-          Verify Code
+          {formik.isSubmitting ? (
+            <svg className="animate-spin h-5 w-5 mr-2 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          ) : null}
+          {formik.isSubmitting ? "Verifying..." : "Verify Code"}
         </button>
       </form>
     </div>

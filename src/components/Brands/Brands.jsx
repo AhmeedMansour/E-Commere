@@ -21,7 +21,7 @@ export default function Brands() {
   }, []);
 
   return (
-    <div className="container mx-auto py-6 px-4 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="container mx-auto py-6 px-4 bg-transparent transition-colors duration-300">
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-6">
     {brandsData.map((item) => (
       <Link key={item._id} to={`/brandsdetails/${item._id}`}>

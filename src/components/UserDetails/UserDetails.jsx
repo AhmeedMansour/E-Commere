@@ -90,10 +90,10 @@ export default function UserDetails() {
   }, [decodedToken]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-transparent from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center p-4">
   <div className="max-w-xl w-full bg-white dark:bg-gray-900 rounded-xl shadow-2xl overflow-hidden border border-gray-100 dark:border-gray-700 transform hover:scale-[1.02] transition-transform duration-300">
     {/* Header Section */}
-    <div className="bg-gradient-to-r from-indigo-600 to-blue-500 p-6">
+    <div className="bg-gradient-to-r from-green-400 to-green-900 p-6">
       <h2 className="text-3xl font-bold text-white text-center drop-shadow-md">User Profile</h2>
     </div>
 

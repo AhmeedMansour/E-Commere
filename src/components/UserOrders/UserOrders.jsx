@@ -52,7 +52,7 @@ export default function UserOrders() {
   }, [id, decodedToken]);
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-white dark:bg-gray-800 shadow-lg rounded-lg">
+    <div className="max-w-6xl mx-auto p-6 bg-gray-100 dark:bg-gray-800 shadow-lg rounded-lg mt-8">
       {order ? (
         <div className="space-y-6">
           {/* Order, Customer, and Address Info */}

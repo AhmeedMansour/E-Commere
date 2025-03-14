@@ -9,8 +9,6 @@ body {
 }
 
 .dark body {
-    background-image: url('/assests/Images/dark.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-color: #101828;
+  
 }
