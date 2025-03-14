@@ -69,15 +69,15 @@ export default function UserDetails() {
         { currentPassword, password: newPassword, rePassword },
         { headers: { token, "Content-Type": "application/json" } }
       );
-      console.log(data);
+
       
       toast.success("Password successfully changed. Please log in again.");
       localStorage.setItem('token',data.token)
-      localStorage.removeItem("token");
-      setTimeout(() => {
-        window.location.href = "/login";
+      // localStorage.removeItem("token");
+      // setTimeout(() => {
+      //   window.location.href = "/login";
 
-      }, 1000);
+      // }, 1000);
     } catch (error) {
       setError(error.response?.data?.message || "Failed to change password");
     } finally {

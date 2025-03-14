@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import logo from '../../assets/Images/freshcart-logo.svg';
 import logo2 from '../../assets/Images/favicon.png';
+import sun from '../../assets/Images/sun.png';
+import moon from '../../assets/Images/full-moon.png';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import { CartContext } from '../../Context/CartContext';
 import { WishlistContext } from '../../Context/WishlistContext';
-import { FaShoppingCart, FaHeart, FaBars, FaTimes, FaSun, FaMoon } from 'react-icons/fa';
+import { FaShoppingCart, FaHeart, FaBars, FaTimes } from 'react-icons/fa';
+import { BsSun, BsMoon } from 'react-icons/bs';
 import { ThemeContext } from '../../Context/ThemeContext';
 
 const Navbar = () => {
@@ -209,40 +212,22 @@ const Navbar = () => {
     <nav className="bg-[#F8F9FA] dark:bg-gray-700 p-5 z-50 relative shadow-md">
       <div className="container mx-auto flex items-center justify-between px-3 relative">
         {/* Logo & Dark Mode Toggle */}
-        <div className="logo flex items-center space-x-2">
+        <div className="logo flex items-center space-x-4">
           <Link to="/">
             <div className="logo flex items-center space-x-2">
-              <Link to="/">
-                <div className="flex items-center">
-                  <img
-                    src={logo2}
-                    alt="FreshCart"
-                    className="h-8 md:h-10 lg:h-12 transition-all"
-                    onError={(e) => {
-                      e.target.src = 'path/to/fallback-logo.png';
-                    }}
-                  />
-                  <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 dark:text-gray-300 hidden sm:block">
-                    Fresh Cart
-                  </h2>
-                </div>
-              </Link>
+              <img src={logo2} alt="FreshCart" className="h-6 md:h-8 lg:h-10 transition-all" />
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-700 dark:text-gray-300 hidden sm:block">
+                FreshCart
+              </h2>
             </div>
           </Link>
-          {/* Dark Mode Toggle */}
-          <label className="relative inline-flex items-center cursor-pointer">
-            <input
-              type="checkbox"
-              checked={isDarkMode}
-              onChange={toggleDarkMode}
-              className="sr-only peer"
-            />
-            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-green-300 dark:peer-focus:ring-green-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600">
-            </div>
-            <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">
-              {isDarkMode ? <FaMoon /> : <FaSun />}
-            </span>
-          </label>
+          <button
+            onClick={toggleDarkMode}
+            className="text-xl text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 transition-colors focus:outline-none flex items-center border-transparent p-2 rounded-2xl ms-3 "
+            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            <img src={isDarkMode ? moon : sun} alt={isDarkMode ? "Moon" : "Sun"} className=" h-6 w-full" />
+          </button>
         </div>
 
         {/* Desktop Center Links */}
@@ -254,34 +239,34 @@ const Navbar = () => {
           <div className="social hidden md:block">
             <ul className="flex space-x-3">
               <li>
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <Link to="https://instagram.com" target="_blank" rel="noopener noreferrer">
                   <i className="fa-brands fa-instagram text-gray-600 dark:text-gray-300 hover:text-pink-500 dark:hover:text-pink-400 transition-colors"></i>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <Link to="https://facebook.com" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-facebook-f text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-500 transition-colors"></i>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer">
+                <Link to="https://tiktok.com" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-tiktok text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-gray-100 transition-colors"></i>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <Link to="https://twitter.com" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-twitter text-gray-600 dark:text-gray-300 hover:text-blue-400 dark:hover:text-blue-300 transition-colors"></i>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <Link to="https://linkedin.com" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-linkedin text-gray-600 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-600 transition-colors"></i>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+                <Link to="https://youtube.com" target="_blank" rel="noopener noreferrer">
                   <i className="fab fa-youtube text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-500 transition-colors"></i>
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
