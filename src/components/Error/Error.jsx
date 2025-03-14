@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Error = () => {
   const navigate = useNavigate();
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-transparent">
+    <div className="min-h-screen flex items-center justify-center bg-transparent">
       <div className="text-center p-8 max-w-lg shadow-2xl bg-white dark:bg-gray-800 rounded-xl">
         <img
           src={error}
